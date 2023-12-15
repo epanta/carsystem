@@ -1,0 +1,58 @@
+<br>
+<br>
+<br>
+<br>
+<div class="col-sm-5" style="margin-left: 0%">
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">{{ car.licensePlate == '' ? 'New Car': 'Edit Car'}}</h3>
+    </div>
+
+
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+            <strong>{{message.text}}</strong>
+        </div>
+        <div class="card-body">
+            <div [ngClass]="getFromGroupClass(year.invalid, year.dirty)">
+                <label for="inputYear" class="col-sm-2 col-form-label">Year:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="car.year" class="form-control" name="year" id="inputYear"
+                        #year="ngModel" placeholder="Year" required>
+                    <span class="help-block" *ngIf="year.invalid && year.dirty">Year is invalid</span>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(licensePlate.invalid, licensePlate.dirty)">
+                <label for="inputLicensePlate" class="col-sm-2 col-form-label">license Plate:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="car.licensePlate" class="form-control" name="licensePlate" id="inputLicensePlate"
+                        #licensePlate="ngModel" placeholder="License plate" required>
+                    <span class="help-block" *ngIf="licensePlate.invalid && licensePlate.dirty">license plate is invalid</span>
+                </div>
+            </div>
+
+            <div [ngClass]="getFromGroupClass(model.invalid, model.dirty)">
+                <label for="inputModel" class="col-sm-2 col-form-label">Model:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="car.model" class="form-control" name="model" id="inputModel"
+                        #model="ngModel" placeholder="Model" required>
+                    <span class="help-block" *ngIf="model.invalid && model.dirty">Model is invalid</span>
+                </div>
+            </div>
+
+            
+            <div [ngClass]="getFromGroupClass(color.invalid, color.dirty)">
+                <label for="inputColor" class="col-sm-2 col-form-label">Color:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="car.color" class="form-control" name="color" id="inputColor"
+                        #color="ngModel" placeholder="Color" required>
+                    <span class="help-block" *ngIf="color.invalid && color.dirty">Color is invalid</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info">Submit</button>
+        </div>
+    </form>
+</div>

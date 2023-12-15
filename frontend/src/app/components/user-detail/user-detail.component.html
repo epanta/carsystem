@@ -1,0 +1,78 @@
+<div class="col-md-10" style="margin-left: 0%">
+    <div class="card card-info">
+        <div class="card-header with-border">
+            <h3>User Detail</h3>
+        </div>
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="uploadFile(user.id, user)" novalidate>
+            <div [ngClass]="classCss" role="alert" *ngIf="message">
+                <strong> {{ message.text}} </strong>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>First name: </b>
+                        <span class="pull-right"><span>{{ user.firstName }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Last name: </b>
+                        <span class="pull-right"><span>{{ user.lastName }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Email: </b> 
+                        <span class="pull-right"></span><span>{{ user.email }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Birthday: </b> 
+                        <span class="pull-right"></span><span>{{ user.birthday | date: 'dd/MM/yyyy'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Login: </b>
+                        <span class="pull-right"><span>{{ user.login }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Phone: </b>
+                        <span class="pull-right"><span>{{ user.phone }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Created at: </b>
+                        <span class="pull-right"><span>{{ user.createdAt | date: 'dd/MM/yyyy HH:MM:SS'}}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Last login: </b>
+                        <span class="pull-right"><span>{{ user.lastLogin | date: 'dd/MM/yyyy HH:MM:SS'}}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span><img [src]="user.image" width="30%" height="30%">
+                            <input type="file" id="image" (change)="onFileChange($event)">
+                            <button type="submit" [disabled]="containsImage == false ? true: false" class="btn btn-info">Upload Photo</button>
+                        </span>
+                    </li>
+                </ul>
+                
+
+            </div>
+            <div class="card-body">
+                <b>User cars: </b> 
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Model</th>
+                            <th>License Plate</th>
+                            <th>Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let car of user.cars">
+                            <td>{{ car.year }}</td>
+                            <td>{{ car.model }}</td>
+                            <td>{{ car.licensePlate }}</td>
+                            <td>{{ car.color }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+
+</div>

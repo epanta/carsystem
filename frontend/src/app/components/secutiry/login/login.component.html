@@ -1,0 +1,40 @@
+<br>
+<br>
+<br>
+<br>
+<div class="col-sm-3" style="margin-left: 35%">
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Car System | Login</h3>
+    </div>
+
+
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="submitLogin()">
+        <div class="alert alert-error" role="alert" *ngIf="message">
+            <strong>Invalid login or password</strong>
+        </div>
+        <div class="card-body">
+            <div [ngClass]="getFromGroupClass(login.invalid, login.dirty)">
+                <label for="inputLogin" class="col-sm-2 col-form-label">Login:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="authenticationRequest.login" class="form-control" name="login" id="inputLogin"
+                        #login="ngModel" placeholder="Login" login>
+                    <span class="help-block" *ngIf="login.invalid && login.dirty"> Login is Invalid</span>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(password.invalid, password.dirty)">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" [(ngModel)]="authenticationRequest.password" class="form-control" name="password"
+                        id="inputPassword" #password="ngModel" placeholder="Password" required>
+                    <span class="help-block" *ngIf="password.invalid && password.dirty"> Password is Invalid</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info">Sign in</button>
+            <button type="submit" (click)="cancelLogin()" class="btn btn-default float-right">Cancel</button>
+        </div>
+    </form>
+</div>

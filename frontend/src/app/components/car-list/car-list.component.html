@@ -1,0 +1,63 @@
+<div [ngClass]="classCss" role="alert" *ngIf="message">
+    <strong>{{message.text}}</strong>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Car List</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group row" *ngIf="shared.role == 'USER'">
+                    <label for="inputId" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-10">
+                        <input type="text" [(ngModel)]="carFilter.id" class="form-control" name="find by id" id="inputId"
+                            #id="ngModel" placeholder="Id" required>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-info pull-left" (click)="clearFilter()">Clear filter</button>
+                <button type="button" style="margin-left: 10px" class="btn btn-info pull-right" (click)="filter(carFilter.id)">Filter</button>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Year</th>
+                            <th>Model</th>
+                            <th>License Plate</th>
+                            <th>Color</th>
+                            <th style="width: 10px">&nbsp;</th>
+                            <th style="width: 10px">&nbsp;</th>
+                            <th style="width: 10px">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let car of listCar">
+                            <td>{{ car.id }}</td>
+                            <td>{{ car.year }}</td>
+                            <td>{{ car.model }}</td>
+                            <td>{{ car.licensePlate }}</td>
+                            <td>{{ car.color }}</td>
+                            <td><button class="btn btn-primary" (click)="edit(car.id)">Edit</button></td>
+                            <td><button class="btn btn-danger" (click)="delete(car.id)">Delete</button></td>
+                            <td><button class="btn btn-success" (click)="detail(car.id)">Detail</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+                    <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event)">{{i+1}}</a></li>
+                    <li class="page-item"><a class="page-link" href="" (click)="setNextPage($event)">&laquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

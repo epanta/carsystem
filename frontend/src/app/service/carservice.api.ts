@@ -1,0 +1,1 @@
+export const CAR_SERVICE_API: string = 'http://localhost:8080';

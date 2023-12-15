@@ -1,0 +1,96 @@
+<br>
+<br>
+<br>
+<br>
+<div class="col-sm-5" style="margin-left: 0%">
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">{{ user.login == '' ? 'New User': 'Edit User'}}</h3>
+    </div>
+
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+            <strong>{{message.text}}</strong>
+        </div>
+        <div class="card-body">
+            <div [ngClass]="getFromGroupClass(firstName.invalid, firstName.dirty)">
+                <label for="inputFirstName" class="col-sm-2 col-form-label">Fist name:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="user.firstName" class="form-control" name="firstName" id="inputFirstName"
+                        #firstName="ngModel" placeholder="First name" firstName>
+                    <span class="help-block" *ngIf="firstName.invalid && firstName.dirty">First name is invalid</span>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(lastName.invalid, lastName.dirty)">
+                <label for="inputLastName" class="col-sm-2 col-form-label">Last name:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="user.lastName" class="form-control" name="lastName" id="inputLastName"
+                        #lastName="ngModel" placeholder="Last name" lastName>
+                    <span class="help-block" *ngIf="lastName.invalid && lastName.dirty">Last name is invalid</span>
+                </div>
+            </div>
+
+            <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="user.email" class="form-control" name="email" id="inputEmail"
+                        #email="ngModel" placeholder="Email" email>
+                    <span class="help-block" *ngIf="email.invalid && email.dirty">Email is invalid</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday:</label>
+                <div class="col-sm-10">
+                    <input type="date" [(ngModel)]="user.birthday" [ngModel]="user.birthday | date:'yyyy-MM-dd'" name="birthday" id="inputBirthday" required>
+                </div>
+            </div>
+
+            <div [ngClass]="getFromGroupClass(login.invalid, login.dirty)">
+                <label for="inputLogin" class="col-sm-2 col-form-label">Login:</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="user.login" class="form-control" name="login" id="inputLogin"
+                        #login="ngModel" placeholder="Login" login>
+                    <span class="help-block" *ngIf="login.invalid && login.dirty"> Login is invalid</span>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(password.invalid, password.dirty)">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" [(ngModel)]="user.password" class="form-control" name="password"
+                        id="inputPassword" #password="ngModel" placeholder="Password" required>
+                    <span class="help-block" *ngIf="password.invalid && password.dirty"> Password is invalid</span>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(phone.invalid, phone.dirty)">
+                <label for="inputPhone" class="col-sm-2 col-form-label">Phone:</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        </div>
+                    <input type="phone" [(ngModel)]="user.phone" class="form-control" name="phone"
+                    data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" id="inputPhone" #phone="ngModel" placeholder="Phone" 
+                    data-mask required>
+                    <span class="help-block" *ngIf="phone.invalid && phone.dirty"> Phone is invalid</span>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="getFromGroupClass(role.invalid, role.dirty)">
+                <label for="inputRole" class="col-sm-2 col-form-label">Role:</label>
+                <div class="col-sm-10">
+                    <select [(ngModel)]="user.role" class="form-control select2" name="role"
+                        id="inputRole" #role="ngModel" style="width: 100%" required>
+                        <option>ADMIN</option>
+                        <option>USER</option>
+                    </select>
+                    <span class="help-block" *ngIf="role.invalid && role.dirty"> Role is invalid</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info">Submit</button>
+        </div>
+    </form>
+</div>

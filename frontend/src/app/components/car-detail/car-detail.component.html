@@ -1,0 +1,43 @@
+<div class="col-md-10" style="margin-left: 0%">
+    <div class="card card-info">
+        <div class="card-header with-border">
+            <h3>Car Detail</h3>
+        </div>
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="uploadFile(car.id, car)" novalidate>
+            <div [ngClass]="classCss" role="alert" *ngIf="message">
+                <strong> {{ message.text}} </strong>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Year: </b>
+                        <span class="pull-right"><span>{{ car.year }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Model: </b>
+                        <span class="pull-right"><span>{{ car.model }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>License Plate: </b>
+                        <span class="pull-right"><span>{{ car.licensePlate }}</span></span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Color: </b>
+                        <span class="pull-right"><span>{{ car.color }}</span></span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <b>Image: </b>
+                        <span class="pull-right"><span>
+                            <img [src]="car.image" width="30%" height="30%">
+                            <input type="file" id="image" (change)="onFileChange($event)">
+                            <button type="submit" [disabled]="car.image == null ? true: false" class="btn btn-info">Upload Image</button>
+                        </span></span>
+                    </li>
+                </ul>
+
+            </div>
+        </form>
+    </div>
+
+</div>
